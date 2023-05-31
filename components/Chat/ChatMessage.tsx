@@ -38,11 +38,7 @@ export const ChatMessage: FC<Props> = memo(
   ({ message, messageIndex, onEdit }) => {
     const { t } = useTranslation('chat');
 
-    const [open, setOpen] = useState(0);
-
-    const handleOpen = (value) => {
-      setOpen(open === value ? 0 : value);
-    };
+    const [open, setOpen] = useState(false);
 
     const {
       state: {
@@ -326,7 +322,7 @@ export const ChatMessage: FC<Props> = memo(
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className={`${
-                      open === 1 ? 'rotate-180' : ''
+                      open ? 'rotate-180' : ''
                     } h-4 w-4 transition-transform`}
                     fill="none"
                     viewBox="0 0 24 24"
@@ -340,10 +336,10 @@ export const ChatMessage: FC<Props> = memo(
                     />
                   </svg>
                 }
-                open={open === 1}
+                open={open}
               >
                 <AccordionHeader
-                  onClick={() => handleOpen(1)}
+                  onClick={() => setOpen(!open)}
                   style={{
                     borderBottom: 0,
                     paddingBottom: 0,
