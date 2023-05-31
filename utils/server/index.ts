@@ -182,6 +182,8 @@ export const JarvisAIStream = async (
         await streamWord(word, i === words.length - 1);
       }
 
+      controller.enqueue(encoder.encode(`~~~${JSON.stringify(sources)}`));
+
       controller.close();
     },
   });

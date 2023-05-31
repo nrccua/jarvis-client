@@ -21,12 +21,7 @@ const handler = async (req: Request): Promise<Response> => {
       messages[messages.length - 1]?.content || '',
     );
 
-    return new Response(
-      stream,
-      // TODO: Refactor this such that we're not feeding the sources to the UI
-      // via the statusText field.
-      sources ? { statusText: JSON.stringify(sources) } : undefined,
-    );
+    return new Response(stream);
   } catch (error) {
     console.error(error);
     return new Response('Error', { status: 500 });
