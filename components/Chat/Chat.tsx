@@ -126,9 +126,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           body,
         });
         if (!response.ok) {
-          homeDispatch({ field: 'loading', value: false });
-          homeDispatch({ field: 'messageIsStreaming', value: false });
-          toast.error(response.statusText);
+          await homeDispatch({ field: 'loading', value: false });
+          await homeDispatch({ field: 'messageIsStreaming', value: false });
+          toast.error(`${response.status} Error: ${response.statusText}`);
           return;
         }
         const data = response.body;
@@ -159,35 +159,20 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               done = true;
               break;
             }
-            const sources = JSON.parse(response.statusText || '[]');
             const { value, done: doneReading } = await reader.read();
             done = doneReading;
             const chunkValue = decoder.decode(value);
-            text += chunkValue;
-            if (isFirst) {
-              isFirst = false;
-              const updatedMessages: Message[] = [
-                ...updatedConversation.messages,
-                { role: 'assistant', content: chunkValue, sources },
-              ];
-              updatedConversation = {
-                ...updatedConversation,
-                messages: updatedMessages,
-              };
-              homeDispatch({
-                field: 'selectedConversation',
-                value: updatedConversation,
-              });
-            } else {
+            const sourcesRaw = chunkValue.split('~~~')[1];
+            if (sourcesRaw) {
               const updatedMessages: Message[] =
                 updatedConversation.messages.map((message, index) => {
                   if (index === updatedConversation.messages.length - 1) {
                     return {
                       ...message,
-                      content: text,
-                      sources,
+                      sources: JSON.parse(sourcesRaw) || [],
                     };
                   }
+
                   return message;
                 });
               updatedConversation = {
@@ -198,6 +183,43 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 field: 'selectedConversation',
                 value: updatedConversation,
               });
+            } else if (chunkValue.length) {
+              text += chunkValue;
+
+              if (isFirst) {
+                isFirst = false;
+                const updatedMessages: Message[] = [
+                  ...updatedConversation.messages,
+                  { role: 'assistant', content: chunkValue },
+                ];
+                updatedConversation = {
+                  ...updatedConversation,
+                  messages: updatedMessages,
+                };
+                homeDispatch({
+                  field: 'selectedConversation',
+                  value: updatedConversation,
+                });
+              } else {
+                const updatedMessages: Message[] =
+                  updatedConversation.messages.map((message, index) => {
+                    if (index === updatedConversation.messages.length - 1) {
+                      return {
+                        ...message,
+                        content: text,
+                      };
+                    }
+                    return message;
+                  });
+                updatedConversation = {
+                  ...updatedConversation,
+                  messages: updatedMessages,
+                };
+                homeDispatch({
+                  field: 'selectedConversation',
+                  value: updatedConversation,
+                });
+              }
             }
           }
           saveConversation(updatedConversation);
