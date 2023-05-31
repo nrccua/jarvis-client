@@ -135,6 +135,22 @@ const Promptbar = () => {
           />
         }
         folderComponent={<PromptFolders />}
+        footerComponent={
+          <div className="text-neutral-300 px-2">
+            <h2 className="text-lg mt-1">About EVi</h2>
+
+            <hr className="my-3" />
+
+            <span>
+              EVi is Encoura&apos;s AI-powered research assistant. By combining
+              Eduventures proprietary research with machine learning, EVi helps
+              higher education institutions find answers that support both
+              strategic and operational decision-making. EVi&apos;s knowledge
+              base is informed by Eduventures Research Library, monthly
+              webinars, and weekly Wake-Up Calls.
+            </span>
+          </div>
+        }
         items={filteredPrompts}
         searchTerm={searchTerm}
         handleSearchTerm={(searchTerm: string) =>

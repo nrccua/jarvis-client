@@ -343,6 +343,7 @@ export const ChatMessage: FC<Props> = memo(
                   style={{
                     borderBottom: 0,
                     paddingBottom: 0,
+                    paddingTop: 10,
                   }}
                 >
                   <span className="prose prose-md dark:prose-invert">
