@@ -1,4 +1,9 @@
 import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+} from '@material-tailwind/react';
+import {
   IconCheck,
   IconCopy,
   IconEdit,
@@ -32,6 +37,8 @@ export interface Props {
 export const ChatMessage: FC<Props> = memo(
   ({ message, messageIndex, onEdit }) => {
     const { t } = useTranslation('chat');
+
+    const [open, setOpen] = useState(false);
 
     const {
       state: {
@@ -130,6 +137,13 @@ export const ChatMessage: FC<Props> = memo(
         textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
       }
     }, [isEditing]);
+
+    const messageIndexIsOld =
+      messageIndex !== (selectedConversation?.messages.length ?? 0) - 1;
+
+    const shouldShowAccordion =
+      (message.sources || []).length > 0 &&
+      (messageIndexIsOld || (!messageIndexIsOld && !messageIsStreaming));
 
     return (
       <div
@@ -301,10 +315,71 @@ export const ChatMessage: FC<Props> = memo(
                 </div>
               </div>
             )}
+
+            {shouldShowAccordion && (
+              <Accordion
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`${
+                      open ? 'rotate-180' : ''
+                    } h-4 w-4 transition-transform`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                }
+                open={open}
+              >
+                <AccordionHeader
+                  onClick={() => setOpen(!open)}
+                  style={{
+                    borderBottom: 0,
+                    paddingBottom: 0,
+                  }}
+                >
+                  <span className="prose prose-md dark:prose-invert">
+                    Sources
+                  </span>
+                </AccordionHeader>
+                <AccordionBody
+                  style={{
+                    padding: 0,
+                  }}
+                >
+                  <ol>
+                    {(message.sources || []).reverse().map(
+                      (source): React.ReactElement => (
+                        <li className="mb-4" key={source.TITLE}>
+                          <p className="prose prose-sm dark:prose-invert font-normal inline">
+                            <a
+                              className="font-normal text-blue-500 dark:text-blue-100"
+                              href="#"
+                            >
+                              &quot;{source.TITLE}&quot;
+                            </a>
+                            &nbsp;by&nbsp;
+                            {source.AUTHORS},&nbsp;{source.YEAR}.
+                          </p>
+                        </li>
+                      ),
+                    )}
+                  </ol>
+                </AccordionBody>
+              </Accordion>
+            )}
           </div>
         </div>
       </div>
     );
   },
 );
+
 ChatMessage.displayName = 'ChatMessage';
