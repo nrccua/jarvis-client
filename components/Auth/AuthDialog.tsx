@@ -1,6 +1,7 @@
-import { FC, ReactElement, useRef, useState } from 'react';
+import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import NAMES from '@/utils/app/names';
 
@@ -14,18 +15,28 @@ interface Props {
 export const AuthDialog: FC<Props> = ({ children, jarvisAuthCookie }) => {
   const [jarvisAuth, setJarvisAuth] = useState(jarvisAuthCookie);
 
+  const { query } = useRouter();
+
+  const jarvisAuthQueryParam = String(query[NAMES.COOKIES.AUTH] || '');
+
   const { t } = useTranslation('auth');
 
   const modalRef = useRef<HTMLDivElement>(null);
 
-  if (jarvisAuthCookie) {
-    return children;
-  }
+  useEffect((): void => {
+    if (!jarvisAuth && jarvisAuthQueryParam) {
+      Cookies.set(NAMES.COOKIES.AUTH, jarvisAuthQueryParam);
+    }
+  }, [jarvisAuthQueryParam]);
 
   const saveJarvisAuth = () => {
     Cookies.set(NAMES.COOKIES.AUTH, jarvisAuth || '');
     window.location.reload();
   };
+
+  if (jarvisAuthCookie || jarvisAuthQueryParam) {
+    return children;
+  }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
