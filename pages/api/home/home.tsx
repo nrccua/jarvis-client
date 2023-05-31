@@ -358,7 +358,7 @@ const Home = ({
   return (
     <>
       <Head>
-        <title>Jarvis UI</title>
+        <title>EVi</title>
         <meta name="description" content="React front-end for Jarvis AI." />
         <meta
           name="viewport"
