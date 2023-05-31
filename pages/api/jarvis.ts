@@ -23,6 +23,8 @@ const handler = async (req: Request): Promise<Response> => {
 
     return new Response(
       stream,
+      // TODO: Refactor this such that we're not feeding the sources to the UI
+      // via the statusText field.
       sources ? { statusText: JSON.stringify(sources) } : undefined,
     );
   } catch (error) {
