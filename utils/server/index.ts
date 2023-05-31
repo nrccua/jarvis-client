@@ -133,7 +133,9 @@ export const JarvisAIStream = async (
   question: string,
 ) => {
   const res = await fetch(
-    `${JARVISAI_API_HOST}/qa?question=${question}&session_id=${sessionId}`,
+    `${JARVISAI_API_HOST}/qa?question=${encodeURIComponent(
+      question,
+    )}&session_id=${sessionId}`,
     {
       headers: {
         [NAMES.COOKIES.AUTH]: jarvisAuthCookie,
