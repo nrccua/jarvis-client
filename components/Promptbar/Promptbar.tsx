@@ -137,7 +137,7 @@ const Promptbar = () => {
         folderComponent={<PromptFolders />}
         footerComponent={
           <div className="text-neutral-500 px-2 pb-3">
-            <h2 className="text-lg mt-1">About EVi</h2>
+            <h2 className="text-encouraBlueDark text-lg mt-1">About EVi</h2>
 
             <hr className="my-3" />
 

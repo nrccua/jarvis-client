@@ -32,6 +32,10 @@ html {
   background: #202123;
 }
 
+svg {
+  stroke: #0080A3;
+}
+
 @media (max-width: 720px) {
   pre {
     width: calc(100vw - 110px);
