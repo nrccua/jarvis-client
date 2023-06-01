@@ -8,7 +8,13 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        encouraBlueMain: '#0080A3',
+        encouraBlueLight: '#E6F5F9',
+        encouraBlueDark: '#003359',
+      },
+    },
   },
   variants: {
     extend: {
