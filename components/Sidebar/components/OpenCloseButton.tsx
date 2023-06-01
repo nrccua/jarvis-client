@@ -4,6 +4,8 @@ interface Props {
   onClick: any;
   side: 'left' | 'right';
 }
+const rightArrow = <IconArrowBarRight className="stroke-gray-500"/>;
+const leftArrow = <IconArrowBarLeft className="stroke-gray-500"/>;
 
 export const CloseSidebarButton = ({ onClick, side }: Props) => {
   return (
@@ -16,7 +18,7 @@ export const CloseSidebarButton = ({ onClick, side }: Props) => {
         } sm:h-8 sm:w-8 sm:text-neutral-700`}
         onClick={onClick}
       >
-        {side === 'right' ? <IconArrowBarRight /> : <IconArrowBarLeft />}
+        {side === 'right' ? rightArrow : leftArrow}
       </button>
       <div
         onClick={onClick}
@@ -36,7 +38,7 @@ export const OpenSidebarButton = ({ onClick, side }: Props) => {
       } sm:h-8 sm:w-8 sm:text-neutral-700`}
       onClick={onClick}
     >
-      {side === 'right' ? <IconArrowBarLeft /> : <IconArrowBarRight />}
+      {side === 'right' ? leftArrow : rightArrow}
     </button>
   );
 };

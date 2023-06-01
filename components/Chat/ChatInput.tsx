@@ -329,7 +329,7 @@ export const ChatInput = ({
               }`,
             }}
             placeholder={
-              t('Type a message or type "/" to select a prompt...') || ''
+              t('Talk to EVi...') || ''
             }
             value={content}
             rows={1}
