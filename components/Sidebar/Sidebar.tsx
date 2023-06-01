@@ -70,15 +70,15 @@ const Sidebar = <T,>({
               handleSearchTerm('');
             }}
           >
-            <IconPlus size={16} />
+            <IconPlus className="stroke-white" size={16} />
             {addItemButtonTitle}
           </button>
 
           <button
-            className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border p-3 text-sm bg-encouraBlueMain text-white transition-colors duration-200 hover:bg-encouraBlueDark"
+            className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border p-2 text-sm bg-encouraBlueMain text-white transition-colors duration-200 hover:bg-encouraBlueDark"
             onClick={handleCreateFolder}
           >
-            <IconFolderPlus size={16} />
+            <IconFolderPlus className="stroke-white" size={25} />
           </button>
         </div>
         <Search
@@ -106,7 +106,7 @@ const Sidebar = <T,>({
             </div>
           ) : (
             <div className="mt-8 select-none text-center text-black opacity-50">
-              <IconMistOff className="mx-auto mb-3" />
+              <IconMistOff className="stroke-gray-500 mx-auto mb-3" />
               <span className="text-[14px] leading-normal">
                 {t('No data.')}
               </span>
