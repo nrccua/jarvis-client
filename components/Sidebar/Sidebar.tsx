@@ -1,4 +1,4 @@
-import { IconFolderPlus, IconMistOff, IconPlus } from '@tabler/icons-react';
+import { IconFolderPlus, IconMistOff, IconPlus, IconMessagePlus } from '@tabler/icons-react';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -64,7 +64,7 @@ const Sidebar = <T,>({
       >
         <div className="flex items-center">
           <button
-            className="text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-black/20 p-3 text-black transition-colors duration-200 hover:bg-gray-500/10"
+            className="text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border p-3 bg-encouraBlueMain text-white transition-colors duration-200 hover:bg-encouraBlueDark"
             onClick={() => {
               handleCreateItem();
               handleSearchTerm('');
@@ -75,7 +75,7 @@ const Sidebar = <T,>({
           </button>
 
           <button
-            className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-black/20 p-3 text-sm text-black transition-colors duration-200 hover:bg-gray-500/10"
+            className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border p-3 text-sm bg-encouraBlueMain text-white transition-colors duration-200 hover:bg-encouraBlueDark"
             onClick={handleCreateFolder}
           >
             <IconFolderPlus size={16} />
@@ -89,7 +89,7 @@ const Sidebar = <T,>({
 
         <div className="flex-grow overflow-auto">
           {items?.length > 0 && (
-            <div className="flex border-b border-black/20 pb-2">
+            <div className="flex border-b pb-2">
               {folderComponent}
             </div>
           )}
