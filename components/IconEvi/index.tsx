@@ -1,7 +1,13 @@
 import React from 'react';
 
-const IconEvI: React.FC = props => (
-  <svg viewBox="0 0 600 600" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px" {...props}>
+const IconEvI: React.FC = (props) => (
+  <svg
+    viewBox="0 0 600 600"
+    x="0px"
+    xmlns="http://www.w3.org/2000/svg"
+    y="0px"
+    {...props}
+  >
     <circle cx="300.1" cy="299.8" fill="#1E9D8B" r="300" />
     <path
       d="M474,299.8v61.6c0,7.7-6.3,14-14,14H140.1c-7.7,0-14-6.3-14-14v-61.6c0-7.7,6.3-14,14-14H460

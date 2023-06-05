@@ -20,14 +20,14 @@ import { Message } from '@/types/chat';
 
 import HomeContext from '@/pages/api/home/home.context';
 
+import IconEvi from '../IconEvi';
 import { CodeBlock } from '../Markdown/CodeBlock';
 import { MemoizedReactMarkdown } from '../Markdown/MemoizedReactMarkdown';
 
-import IconEvi from '../IconEvi';
-
-import rehypeMathjax from 'rehype-mathjax';
+// import rehypeMathjax from 'rehype-mathjax';
 import remarkGfm from 'remark-gfm';
-import remarkMath from 'remark-math';
+
+// import remarkMath from 'remark-math';
 
 export interface Props {
   message: Message;
@@ -233,8 +233,8 @@ export const ChatMessage: FC<Props> = memo(
               <div className="flex flex-row">
                 <MemoizedReactMarkdown
                   className="prose dark:prose-invert flex-1"
-                  remarkPlugins={[remarkGfm, remarkMath]}
-                  rehypePlugins={[rehypeMathjax]}
+                  remarkPlugins={[remarkGfm /* remarkMath */]}
+                  // rehypePlugins={[rehypeMathjax]}
                   components={{
                     code({ node, inline, className, children, ...props }) {
                       if (children.length) {

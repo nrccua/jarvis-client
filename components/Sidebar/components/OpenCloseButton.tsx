@@ -4,8 +4,8 @@ interface Props {
   onClick: any;
   side: 'left' | 'right';
 }
-const rightArrow = <IconArrowBarRight className="stroke-gray-500"/>;
-const leftArrow = <IconArrowBarLeft className="stroke-gray-500"/>;
+const rightArrow = <IconArrowBarRight className="stroke-gray-500" />;
+const leftArrow = <IconArrowBarLeft className="stroke-gray-500" />;
 
 export const CloseSidebarButton = ({ onClick, side }: Props) => {
   return (
