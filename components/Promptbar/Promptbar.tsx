@@ -143,7 +143,7 @@ const Promptbar = () => {
 
             <span className="text-xs">
               EVi is Encoura&apos;s AI-powered research assistant. By combining
-              Eduventures proprietary research with machine learning, EVi helps
+              Eduventures proprietary research with generative AI, EVi helps
               higher education institutions find answers that support both
               strategic and operational decision-making. EVi&apos;s knowledge
               base is informed by Eduventures Research Library, monthly
