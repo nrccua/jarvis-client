@@ -1,4 +1,9 @@
-import { IconFolderPlus, IconMistOff, IconPlus, IconMessagePlus } from '@tabler/icons-react';
+import {
+  IconFolderPlus,
+  IconMessagePlus,
+  IconMistOff,
+  IconPlus,
+} from '@tabler/icons-react';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -89,9 +94,7 @@ const Sidebar = <T,>({
 
         <div className="flex-grow overflow-auto">
           {items?.length > 0 && (
-            <div className="flex border-b pb-2">
-              {folderComponent}
-            </div>
+            <div className="flex border-b pb-2">{folderComponent}</div>
           )}
 
           {items?.length > 0 ? (

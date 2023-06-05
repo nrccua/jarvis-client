@@ -328,9 +328,7 @@ export const ChatInput = ({
                   : 'hidden'
               }`,
             }}
-            placeholder={
-              t('Talk to EVi...') || ''
-            }
+            placeholder={t('Talk to EVi...') || ''}
             value={content}
             rows={1}
             onCompositionStart={() => setIsTyping(true)}
