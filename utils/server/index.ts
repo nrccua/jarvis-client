@@ -174,7 +174,7 @@ export const JarvisAIStream = async (
       const streamWord = async (word: string, isLastWord: boolean) => {
         controller.enqueue(encoder.encode(isLastWord ? word : `${word} `));
         await new Promise((resolve) =>
-          setTimeout(resolve, Math.floor(Math.random() * (250 - 0 + 1) + 0)),
+          setTimeout(resolve, Math.floor(Math.random() * (125 - 0 + 1) + 0)),
         );
       };
 
