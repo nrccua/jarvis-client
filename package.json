@@ -14,7 +14,7 @@
   "dependencies": {
     "@dqbd/tiktoken": "1.0.2",
     "@material-tailwind/react": "2.0.1",
-    "@tabler/icons-react": "2.9.0",
+    "@tabler/icons-react": "3.14.0",
     "cookie": "0.5.0",
     "eventsource-parser": "0.1.0",
     "i18next": "22.5.1",
