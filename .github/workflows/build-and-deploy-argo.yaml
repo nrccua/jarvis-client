@@ -63,16 +63,27 @@ jobs:
           git config --global user.name nrccua-ci-automation
           find "argocd/apps/dev/templates/" -type f -name "dsc-jarvis-client.yaml" -exec sed  -i -e 's@image:.*@image: '"${IMAGE_TAG}"'@g' {} +
           LOG=$(git log -1 --graph --abbrev-commit --date=relative | cat -)
+          APP_NAME=$(basename `git rev-parse --show-toplevel`)
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          BRANCH_NAME=deploy-${APP_NAME}-${SHORT_SHA}
           cd argocd
+          git checkout -b ${BRANCH_NAME} 2>/dev/null || git checkout ${BRANCH_NAME}
           git add "apps/dev/templates"
           git commit -m """$LOG"""
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.AUTOMATION_PAT }}
-          branch: main
-          directory: argocd
-          repository: nrccua/k8s-argocd-gitops
+
+      - name: Push changes and create PR
+        run: |
+          LOG=$(git log -1 --graph --abbrev-commit --date=relative | cat -)
+          REPOSITORY=${{ github.repository }}
+          APP_NAME=$(basename `git rev-parse --show-toplevel`)
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          BRANCH_NAME=deploy-${APP_NAME}-${SHORT_SHA}
+          cd argocd
+          git push --set-upstream origin ${BRANCH_NAME}
+          GH_TOKEN=${{ secrets.token }} gh pr create --repo nrccua/k8s-argocd-gitops             --head ${BRANCH_NAME}             --base main             --title "[${APP_NAME}] Update deployment manifest"             --body "Automated update of the deployment manifest. Repository ${REPOSITORY}. 
+            **Git Log**
+            ${LOG}"
+
       - name: call slack action
         uses: nrccua/github-action-build-slack-notification@v1.0.1
         with:
